@@ -1,0 +1,13 @@
+{
+  "name": "default-plugins",
+  "version": "0.0.1",
+  "dependencies": {
+	"wordpress": "4.1.1",
+    "jquery": "~1.10.2"
+  },
+  "private": true,
+  "devDependencies": {
+    "ninja-forms": "https://github.com/wpninjas/ninja-forms.git#2.7.7",
+  	"wp-maintenance-mode": "https://github.com/Designmodocom/WP-Maintenance-Mode.git"
+  }
+}

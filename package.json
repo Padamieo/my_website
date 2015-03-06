@@ -1,0 +1,22 @@
+{
+	"name": "grunt_wp_themer",
+	"version": "0.0.1",
+	"author": "Michael Adam Lockwood",
+	"private": true,
+	"devDependencies": {
+		"grunt": "~0.4.0",
+		"grunt-contrib-compass": "*",
+		"grunt-newer": "*",
+		"grunt-contrib-copy": "*",
+		"grunt-contrib-cssmin": "*",
+		"grunt-contrib-uglify": "*",
+		"grunt-text-replace": "*",
+		"grunt-contrib-clean": "*",
+		"grunt-contrib-watch": "*",
+		"grunt-shell": "*"
+	},
+	"dependencies": {
+		"time-grunt": "*",
+		"bower": "*"
+	}
+}
