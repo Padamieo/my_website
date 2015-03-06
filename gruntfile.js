@@ -1,8 +1,5 @@
 module.exports = function(grunt){
 
-	var theme_folder = 'my_awesome_theme'; // name of your theme here
-	//<%= pkg.name %>
-
   var pkg = grunt.file.readJSON('package.json');
   require('time-grunt')(grunt); //Outputs a time report to console after any operations have run
 
@@ -14,7 +11,7 @@ module.exports = function(grunt){
 					{
 					cwd: 'src/',
 					src: ['**', '!*/*.css', '!*/*.js'],
-					dest: 'build/wp-content/themes/'+theme_folder+'/',
+					dest: 'build/wp-content/themes/<%= pkg.name %>/',
 					nonull: false,
 					expand: true,
 					flatten: false,
@@ -40,7 +37,7 @@ module.exports = function(grunt){
 					{
 					cwd: 'src/',
 					src: ['**', '!*/*scss', '!*.rb'],
-					dest: 'build/wp-content/themes/'+theme_folder+'',
+					dest: 'build/wp-content/themes/<%= pkg.name %>',
 					nonull: false,
 					expand: true,
 					flatten: false,
@@ -95,7 +92,7 @@ module.exports = function(grunt){
 					expand: true,
 					cwd: 'src/',
 					src: '**/*.js',
-					dest: 'build/wp-content/themes/'+theme_folder+'/',
+					dest: 'build/wp-content/themes/<%= pkg.name %>/',
 				}]
 			}
 		},
@@ -104,7 +101,7 @@ module.exports = function(grunt){
 				expand: true,
 				cwd: 'src/css/',
 				src: ['**/*.css'],
-				dest: 'build/wp-content/themes/'+theme_folder+'/css',
+				dest: 'build/wp-content/themes/<%= pkg.name %>/css',
 				ext: '.css',
 			}
 		},
@@ -121,9 +118,8 @@ module.exports = function(grunt){
 					src : 'build/css/style.css'
 				},
 				options: {
-					server: {
-						baseDir: "./build"
-					},
+					baseDir: "./build",
+					proxy: "localhost/my_website/build/",
 					watchTask: true
 				}
 			}
