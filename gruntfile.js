@@ -1,17 +1,10 @@
 module.exports = function(grunt){
 
-	//keeping as example of mac specifics
-	if (process.platform === "darwin") {
-		password = "--dbpass=root";
-	} else {
-		password = "";
-	}
-	var use_pass = password;
-
 	var theme_folder = 'my_awesome_theme'; // name of your theme here
+	//<%= pkg.name %>
 
-    var pkg = grunt.file.readJSON('package.json');
-    require('time-grunt')(grunt); //Outputs a time report to console after any operations have run
+  var pkg = grunt.file.readJSON('package.json');
+  require('time-grunt')(grunt); //Outputs a time report to console after any operations have run
 
 	grunt.initConfig({
 		pkg: pkg,
@@ -70,32 +63,6 @@ module.exports = function(grunt){
 					filter: 'isFile',
 					}
 				]
-			},
-			move_required:{
-				files:[
- 					{
-						cwd: 'wordpress/',
-						src: ['wp-cli.phar'],
-						dest: 'build/',
-						nonull: false,
-						expand: true,
-						flatten: false,
-						filter: 'isFile',
-					}
-				]
-			}
-		},
-		shell: {
-			createdb: {
-				command: 'mysqladmin -h localhost -uroot -p"" create database_<%= grunt.template.today("yyyymmdd") %>'
-			},
-			createconfig: {
-				command: [
-
-				'cd ./build',
-				'php wp-cli.phar core config --dbname=database_<%= grunt.template.today("yyyymmdd") %> --dbuser=root '+ use_pass +' --dbhost=localhost'
-
-				].join('&&')
 			}
 		},
 		watch: {
@@ -147,24 +114,35 @@ module.exports = function(grunt){
 					config: 'config_live.rb'
 				}
 			}
+		},
+		browserSync: {
+			dev: {
+				bsFiles: {
+					src : 'build/css/style.css'
+				},
+				options: {
+					server: {
+						baseDir: "./build"
+					},
+					watchTask: true
+				}
+			}
 		}
 	});
 
-	// Load the grunt plugins we'll need for minification, uglification, etc.
+	// Load the grunt plugins we'll need
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	//grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-text-replace');
-	grunt.loadNpmTasks('grunt-newer');
 	grunt.loadNpmTasks('grunt-contrib-compass');
-	grunt.loadNpmTasks('grunt-shell');
+	grunt.loadNpmTasks('grunt-browser-sync');
+	grunt.loadNpmTasks('grunt-newer');
 
 	// Default task(s).
 	grunt.registerTask('build', ['newer:copy:build_wordpress','newer:copy:build_theme','newer:copy:build_plugins']);
-	grunt.registerTask('wp-config', ['newer:copy:move_required','shell:createdb','shell:createconfig']);
-	grunt.registerTask("update", ['copy:live','newer:cssmin','newer:uglify','compass:live']);
-	grunt.registerTask("default", ['watch']);
-	
+	grunt.registerTask("update", ['newer:copy:live','newer:cssmin','newer:uglify','compass:live']);
+	grunt.registerTask("default", ['browserSync', 'watch']);
+
 };
