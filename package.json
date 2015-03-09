@@ -1,7 +1,7 @@
 {
 	"name": "niss_theme",
 	"version": "0.0.1",
-	"author": "Michael Adam Lockwood",
+	"author": "Michaél Adam Lockwood",
 	"private": true,
 	"devDependencies": {
 		"grunt": "~0.4.0",

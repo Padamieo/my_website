@@ -1,5 +1,5 @@
 
-// masonry code 
+// masonry code
 $(document).ready(function() {
   $('#post-area').masonry({
     // options
@@ -11,14 +11,13 @@ $(document).ready(function() {
     easing: 'linear',
     queue: false
   }
-	
+
   });
 });
 
 
 // hover code for index  templates
 $(document).ready(function() {
-	
 		$('#post-area .image').hover(
 			function() {
 				$(this).stop().fadeTo(300, 0.8);
@@ -26,25 +25,23 @@ $(document).ready(function() {
 			function() {
 				$(this).fadeTo(300, 1.0);
 			}
-		);	
-		
-	
+		);
 });
 
 
 // comment form values
 $(document).ready(function(){
 	$("#comment-form input").focus(function () {
-		var origval = $(this).val();	
-		$(this).val("");	
+		var origval = $(this).val();
+		$(this).val("");
 		//console.log(origval);
 		$("#comment-form input").blur(function () {
 			if($(this).val().length === 0 ) {
-				$(this).val(origval);	
+				$(this).val(origval);
 				origval = null;
 			}else{
 				origval = null;
-			};	
+			};
 		});
 	});
 });
