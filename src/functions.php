@@ -1,33 +1,51 @@
 <?php
-   
+
+
+
 	// Add RSS links to <head> section
 	add_theme_support('automatic-feed-links') ;
-	
+
+  // Load websites CSS and fonts
+  add_action("wp_enqueue_scripts", "site_style_enqueue", 1);
+  function site_style_enqueue() {
+  	if ( !is_admin() ) {
+  		wp_register_style('css.style', (get_template_directory_uri()."/css/style.css"),false,false,false);
+  		//wp_register_style('font.ubuntu', ('http://fonts.googleapis.com/css?family=Ubuntu:300,400,700'),false,false,false);
+
+  		wp_enqueue_style('css.style');
+  		//wp_enqueue_style('font.ubuntu');
+
+  	}
+  }
+
 	// Load jQuery
 	if ( !function_exists('core_mods') ) {
 		function core_mods() {
 			if ( !is_admin() ) {
 				wp_deregister_script('jquery');
 				wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"));
+
 				wp_register_script('jquery.masonry', (get_template_directory_uri()."/js/jquery.masonry.min.js"),'jquery',false,true);
 				wp_register_script('niss.functions', (get_template_directory_uri()."/js/functions.js"),'jquery.masonry',false,true);
-				
+
 				wp_enqueue_script('jquery');
+
 				wp_enqueue_script('jquery.masonry');
 				wp_enqueue_script('niss.functions');
 			}
 		}
 		core_mods();
 	}
-	
+
 	// Load Fancybox setups
 	function fancybox($input){
 			wp_register_script('jquery.fancybox', (get_template_directory_uri()."/js/jquery.fancybox.js"),'jquery',false,false);
 			wp_register_script('jquery.fancybox_gallery', (get_template_directory_uri()."/js/jquery.fancybox_gallery.js"),false,true);
 			wp_register_script('jquery.fancybox_regular', (get_template_directory_uri()."/js/jquery.fancybox_regular.js"),false,true);
-			
+
 			wp_register_style('jquery.fancybox_style', (get_template_directory_uri()."/css/jquery.fancybox.css"),false,false,false);
 			wp_register_style('jquery.fancybox_style_buttons', (get_template_directory_uri()."/css/jquery.fancybox_buttons.css"),false,false,false);
+
 			if($input == 'gallery'){
 				wp_enqueue_script('jquery.fancybox');
 				wp_enqueue_script('jquery.fancybox_gallery');
@@ -40,34 +58,35 @@
 				wp_enqueue_style('jquery.fancybox_style_buttons');
 			}
 	}
-	
+
+
 	// content width
 	if ( !isset( $content_width ))  {
-		$content_width = 710; 
+		$content_width = 710;
 	}
 
 	// Clean up the <head>
 	function removeHeadLinks() {
     	remove_action('wp_head', 'rsd_link');
-    	remove_action('wp_head', 'wlwmanifest_link'); 
+    	remove_action('wp_head', 'wlwmanifest_link');
 			remove_action( 'wp_head', 'feed_links_extra', 3 ); // removes RSS links added by Padam
 			remove_action( 'wp_head', 'feed_links', 2 ); // removes RSS links added by Padam
     }
     add_action('init', 'removeHeadLinks');
     remove_action('wp_head', 'wp_generator');
-    
+
 	// Niss post thumbnails
 	add_theme_support( 'post-thumbnails' );
 		add_image_size('summary-image', 310, 9999);
 		add_image_size('detail-image', 770, 9999);
-	
-	
-    // menu 
+
+
+    // menu
 	add_action( 'init', 'register_niss_menu' );
 
 	function register_niss_menu() {
 		register_nav_menu( 'main_nav', __( 'Main Menu' ) );
-	} 
+	}
 
      //setup footer widget area
 	if (function_exists('register_sidebar')) {
@@ -82,24 +101,24 @@
     	));
 	}
 
-	// hide blank excerpts 
+	// hide blank excerpts
 	function custom_excerpt_length( $length ) {
 	return 0;
 	}
 	add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-	
+
 	function new_excerpt_more($more) {
        global $post;
 	return '';
 	}
 	add_filter('excerpt_more', 'new_excerpt_more');
-	
+
 	// Add Post Formats Support
 	add_theme_support( 'post-formats', array( 'aside', 'video', 'quote', 'link', 'image', 'gallery') );
 
-	// Niss theme options 
+	// Niss theme options
 	include 'options/admin-menu.php';
-	
+
 	// call images on gallery post format improve later to include videos?
 	function gallery_attachment($size = thumbnail) {
 
@@ -114,14 +133,14 @@
 			foreach($images as $image) {
 				$post_id	= get_the_ID();
 				$custom_post_id = get_featured_image_display($image->ID);
-				
+
 				if($custom_post_id == $post_id){
-				
+
 					$image_url   = wp_get_attachment_url($image->ID);
 					$image_title = apply_filters('the_title',$image->post_title);
 					$thumb_url = wp_get_attachment_thumb_url($image->ID);
 					$image_alt_tag = $image->_wp_attachment_image_alt;
-					
+
 					if($i < 11){
 						echo '<a class="tint-gal fancybox" href="'.$image_url.'" data-fancybox-group="gallery-'.$post_id.'" caption="'.$image_title.'">';
 							echo '<img class="gallery" src="'.$thumb_url.'" alt="'.$image_alt_tag.'"></img></a>';
@@ -137,7 +156,7 @@
 		$postlink = get_permalink($image->post_parent);
 		$img_desc = $image->post_content;
 	*/
-	
+
 /////////////////////////////////////////////////////////////////////////////// CLEAN UP
 // call special attachments webgl unity videos
 function special_attachment($size = thumbnail) {
@@ -152,12 +171,12 @@ function special_attachment($size = thumbnail) {
 		foreach($images as $image) {
 			$post_id	= get_the_ID();
 			$custom_post_id = get_post_meta($image->ID, 'custom_post_id', true);
-			
+
 			if($post_id == $custom_post_id){
-			
+
 				$image_fancybox = get_post_meta($image->ID, 'custom_checkbox', true);
 				$image_type = get_post_meta($image->ID, 'custom_radio', true);
-				
+
 				//echo $image_type; USED FOR TESTING
 				if($image_type == 1 || $image_type == '')
 				{
@@ -167,13 +186,13 @@ function special_attachment($size = thumbnail) {
 					$image_content = $image->post_content;
 					$image_excerpt = $image->post_excerpt;
 					$content = apply_filters('the_content', $image_content);
-					
+
 					//echo '<a class="tint fancybox '.$test.'" href="'.$image_url.'" title="'.$image_title.'">';
 					//echo '<img class="gallery" src="'.$thumb_url.'" alt="'.$image_alt_tag.'"></img></a>';
-					
+
 					echo $content;
-					
-					
+
+
 					if($image_fancybox == 'on')
 					{
 						//CLEAN UP!
@@ -181,7 +200,7 @@ function special_attachment($size = thumbnail) {
 						echo '</a>';
 						echo '<div class="clear"></div>';
 					}
-					
+
 					//echo $image_excerpt;
 					//echo $image_title;
 				}
@@ -203,11 +222,11 @@ function special_attachment($size = thumbnail) {
 /* adding in the special media input type*/
 /*-------------------------------------------------------------------------------------------*/
 class attachment_special {
-	
+
 	function attachment_special() {
 		add_action('init',array($this,'create_post_type'));
 	}
-	
+
 	function create_post_type() {
 		$labels = array(
 		    'name' => 'Special Media',
@@ -230,8 +249,8 @@ class attachment_special {
 			'public' => true,
 			'exclude_from_search' => true,
 			'publicly_queryable' => false,
-			'show_ui' => true, 
-			'show_in_nav_menus' => false, 
+			'show_ui' => true,
+			'show_in_nav_menus' => false,
 			'show_in_menu' => true,
 			'show_in_admin_bar' => true,
 			'menu_position' => 10,
@@ -242,57 +261,57 @@ class attachment_special {
 			'rewrite' => array('slug' => 'your-slug', 'with_front' => 'before-your-slug'),
 			'query_var' => true,
 			'can_export' => true
-		); 
+		);
 		register_post_type('attachment_special',$args);
 	}
 }
 
-$attachment_special = new attachment_special();					
+$attachment_special = new attachment_special();
 
 /*-------------------------------------------------------------------------------------------*/
 /* META for now untill names is given*/
 /* allowing a image or media to be asigned to a post via id*/
 /*-------------------------------------------------------------------------------------------*/
-// Add the Meta Box  
-function add_custom_meta_box() {  
-    add_meta_box(  
-        'custom_meta_box', // $id  
-        'Custom Meta Box', // $title   
-        'show_custom_meta_box', // $callback  
-        'attachment_special', // $page  
-        'normal', // $context  
-        'high'); // $priority  
-}  
+// Add the Meta Box
+function add_custom_meta_box() {
+    add_meta_box(
+        'custom_meta_box', // $id
+        'Custom Meta Box', // $title
+        'show_custom_meta_box', // $callback
+        'attachment_special', // $page
+        'normal', // $context
+        'high'); // $priority
+}
 add_action('add_meta_boxes', 'add_custom_meta_box');
-	
-    // Field Array  
-    $prefix = 'custom_';  
-    $custom_meta_fields = array(  
-		array (  
-			'label' => 'Special Media Type',  
-			'desc'  => 'A description for the field.',  
-			'id'    => $prefix.'radio',  
-			'type'  => 'radio',  
-			'options' => array (  
-				'one' => array (  
-					'label' => 'Video',  
-					'value' => '1'  
-				),  
-				'two' => array (  
-					'label' => 'Unity3D (TBC)',  
-					'value' => '2'  
-				),  
-				'three' => array (  
-					'label' => 'Webgl (TBC)',  
-					'value' => '3'  
-				)  
-			)  
+
+    // Field Array
+    $prefix = 'custom_';
+    $custom_meta_fields = array(
+		array (
+			'label' => 'Special Media Type',
+			'desc'  => 'A description for the field.',
+			'id'    => $prefix.'radio',
+			'type'  => 'radio',
+			'options' => array (
+				'one' => array (
+					'label' => 'Video',
+					'value' => '1'
+				),
+				'two' => array (
+					'label' => 'Unity3D (TBC)',
+					'value' => '2'
+				),
+				'three' => array (
+					'label' => 'Webgl (TBC)',
+					'value' => '3'
+				)
+			)
 		) ,
-		array(  
-			'label'=> 'Fancybox',  
-			'desc'  => 'Allows viewing in lightbox',  
-			'id'    => $prefix.'checkbox',  
-			'type'  => 'checkbox'  
+		array(
+			'label'=> 'Fancybox',
+			'desc'  => 'Allows viewing in lightbox',
+			'id'    => $prefix.'checkbox',
+			'type'  => 'checkbox'
 		),
 		array(
 			'label' => 'Display On:',
@@ -303,87 +322,87 @@ add_action('add_meta_boxes', 'add_custom_meta_box');
 		)
 	);
 
-// The Callback  
-function show_custom_meta_box() {  
-global $custom_meta_fields, $post;  
-// Use nonce for verification  
-echo '<input type="hidden" name="custom_meta_box_nonce" value="'.wp_create_nonce(basename(__FILE__)).'" />';  
-      
-    // Begin the field table and loop  
-    echo '<table class="form-table">';  
-    foreach ($custom_meta_fields as $field) {  
-        // get value of this field if it exists for this post  
-        $meta = get_post_meta($post->ID, $field['id'], true);  
-        // begin a table row with  
-        echo '<tr> 
-                <th><label for="'.$field['id'].'">'.$field['label'].'</label></th> 
-                <td>';  
-                switch($field['type']) {  
+// The Callback
+function show_custom_meta_box() {
+global $custom_meta_fields, $post;
+// Use nonce for verification
+echo '<input type="hidden" name="custom_meta_box_nonce" value="'.wp_create_nonce(basename(__FILE__)).'" />';
+
+    // Begin the field table and loop
+    echo '<table class="form-table">';
+    foreach ($custom_meta_fields as $field) {
+        // get value of this field if it exists for this post
+        $meta = get_post_meta($post->ID, $field['id'], true);
+        // begin a table row with
+        echo '<tr>
+                <th><label for="'.$field['id'].'">'.$field['label'].'</label></th>
+                <td>';
+                switch($field['type']) {
                     // case items will go here
-					
-					// radio  
-					case 'radio':  
-						foreach ( $field['options'] as $option ) {  
-							echo '<input type="radio" name="'.$field['id'].'" id="'.$option['value'].'" value="'.$option['value'].'" ',$meta == $option['value'] ? ' checked="checked"' : '',' /> 
-									<label for="'.$option['value'].'">'.$option['label'].'</label><br />';  
-						}  
+
+					// radio
+					case 'radio':
+						foreach ( $field['options'] as $option ) {
+							echo '<input type="radio" name="'.$field['id'].'" id="'.$option['value'].'" value="'.$option['value'].'" ',$meta == $option['value'] ? ' checked="checked"' : '',' />
+									<label for="'.$option['value'].'">'.$option['label'].'</label><br />';
+						}
 					break;
-					
-					// checkbox  
-					case 'checkbox':  
-						echo '<input type="checkbox" name="'.$field['id'].'" id="'.$field['id'].'" ',$meta ? ' checked="checked"' : '','/> 
-							<label for="'.$field['id'].'">'.$field['desc'].'</label>';  
+
+					// checkbox
+					case 'checkbox':
+						echo '<input type="checkbox" name="'.$field['id'].'" id="'.$field['id'].'" ',$meta ? ' checked="checked"' : '','/>
+							<label for="'.$field['id'].'">'.$field['desc'].'</label>';
 					break;
-					
-					// post_list  
-					case 'post_list':  
-					$items = get_posts( array (  
-						'post_type' => $field['post_type'],  
-						'posts_per_page' => -1  
-					));  
-						echo '<select name="'.$field['id'].'" id="'.$field['id'].'"> 
-								<option value="">Select One</option>'; // Select One  
-							foreach($items as $item) {  
-								echo '<option value="'.$item->ID.'"',$meta == $item->ID ? ' selected="selected"' : '','>'.$item->post_type.': '.$item->post_title.'</option>';  
-							} // end foreach  
-						echo '</select><br /><span class="description">'.$field['desc'].'</span>';  
+
+					// post_list
+					case 'post_list':
+					$items = get_posts( array (
+						'post_type' => $field['post_type'],
+						'posts_per_page' => -1
+					));
+						echo '<select name="'.$field['id'].'" id="'.$field['id'].'">
+								<option value="">Select One</option>'; // Select One
+							foreach($items as $item) {
+								echo '<option value="'.$item->ID.'"',$meta == $item->ID ? ' selected="selected"' : '','>'.$item->post_type.': '.$item->post_title.'</option>';
+							} // end foreach
+						echo '</select><br /><span class="description">'.$field['desc'].'</span>';
 					break;
-	
-                } //end switch  
-        echo '</td></tr>';  
-    } // end foreach  
-    echo '</table>'; // end table  
+
+                } //end switch
+        echo '</td></tr>';
+    } // end foreach
+    echo '</table>'; // end table
 }
 
-// Save the Data  
-function save_custom_meta($post_id) {  
-    global $custom_meta_fields;  
-      
-    // verify nonce  
-    if (!wp_verify_nonce($_POST['custom_meta_box_nonce'], basename(__FILE__)))   
-        return $post_id;  
-    // check autosave  
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)  
-        return $post_id;  
-    // check permissions  
-    if ('page' == $_POST['post_type']) {  
-        if (!current_user_can('edit_page', $post_id))  
-            return $post_id;  
-        } elseif (!current_user_can('edit_post', $post_id)) {  
-            return $post_id;  
-    }  
-      
-    // loop through fields and save the data  
-    foreach ($custom_meta_fields as $field) {  
-        $old = get_post_meta($post_id, $field['id'], true);  
-        $new = $_POST[$field['id']];  
-        if ($new && $new != $old) {  
-            update_post_meta($post_id, $field['id'], $new);  
-        } elseif ('' == $new && $old) {  
-            delete_post_meta($post_id, $field['id'], $old);  
-        }  
-    } // end foreach  
-}  
+// Save the Data
+function save_custom_meta($post_id) {
+    global $custom_meta_fields;
+
+    // verify nonce
+    if (!wp_verify_nonce($_POST['custom_meta_box_nonce'], basename(__FILE__)))
+        return $post_id;
+    // check autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return $post_id;
+    // check permissions
+    if ('page' == $_POST['post_type']) {
+        if (!current_user_can('edit_page', $post_id))
+            return $post_id;
+        } elseif (!current_user_can('edit_post', $post_id)) {
+            return $post_id;
+    }
+
+    // loop through fields and save the data
+    foreach ($custom_meta_fields as $field) {
+        $old = get_post_meta($post_id, $field['id'], true);
+        $new = $_POST[$field['id']];
+        if ($new && $new != $old) {
+            update_post_meta($post_id, $field['id'], $new);
+        } elseif ('' == $new && $old) {
+            delete_post_meta($post_id, $field['id'], $old);
+        }
+    } // end foreach
+}
 add_action('save_post', 'save_custom_meta');
 
 //below probably need to be improved to a drop down select option later
@@ -402,7 +421,7 @@ add_action('save_post', 'save_custom_meta');
 
 	//Save our new "display" field
 	function add_display_field_to_media_uploader_save( $post, $attachment ) {
-		if ( ! empty( $attachment['display_field'] ) ) 
+		if ( ! empty( $attachment['display_field'] ) )
 			update_post_meta( $post['ID'], '_custom_display', $attachment['display_field'] );
 		else
 			delete_post_meta( $post['ID'], '_custom_display' );

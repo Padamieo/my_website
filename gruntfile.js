@@ -76,7 +76,7 @@ module.exports = function(grunt){
 			},
 			compass:{
 				files: ['src/sass/*.scss'],
-				tasks: ['compass:live']
+				tasks: ['compass:new']
 			},
 			copy:{
 				files: ['src/**/**.php','src/**/**.{png,jpg,gif}'],
@@ -110,7 +110,18 @@ module.exports = function(grunt){
 				options: {
 					config: 'config_live.rb'
 				}
-			}
+			},
+      new:{
+        options:{
+          sassDir: 'src/sass',
+          cssDir: 'build/wp-content/themes/<%= pkg.name %>/css',
+          imagesPath: 'src/img',
+          javascriptsPath: 'src/js',
+          fontsPath: 'src/fonts',
+          outputStyle: 'compressed',
+          environment: 'production'
+        }
+      }
 		},
 		browserSync: {
 			dev: {
@@ -138,7 +149,7 @@ module.exports = function(grunt){
 
 	// Default task(s).
 	grunt.registerTask('build', ['newer:copy:build_wordpress','newer:copy:build_theme','newer:copy:build_plugins']);
-	grunt.registerTask("update", ['newer:copy:live','newer:cssmin','newer:uglify','compass:live']);
+	grunt.registerTask("update", ['newer:copy:live','newer:cssmin','newer:uglify','compass:new']);
 	grunt.registerTask("default", ['browserSync', 'watch']);
 
 };
