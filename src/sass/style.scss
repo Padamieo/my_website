@@ -2,10 +2,11 @@
 @import "common";
 
 body {
-  background:#e5e5e5;
+  background:#eee;
   font-size:12px;
   line-height:20px;
   font-family:'Helvetica', Arial, Helvetica, sans-serif;
+  font-weight:normal;
 }
 
 #wrap {
@@ -76,4 +77,121 @@ p{
   padding-top:8px;
   padding-bottom:8px;
   font-family:'Helvetica', Arial, Helvetica, sans-serif;
+}
+
+/* list Styles */
+ul{
+  padding:0px;
+  margin:0;
+  margin-left:0px;
+  font-family:'Helvetica',Arial, Helvetica, sans-serif;
+  margin-top:10px;
+}
+ul li{
+  font-size:12px;
+  color:#858585;
+  padding-left:10px;
+  margin-bottom:7px;
+  list-style:inside;
+  list-style-type:square;
+}
+ol{
+  padding:0px;
+  margin:0;
+  margin-left:25px;
+  font-family:'Helvetica',Arial, Helvetica, sans-serif;
+  margin-top:10px;
+}
+ol li {
+  font-size:12px;
+  color:#858585;
+  padding-left:10px;
+  margin-bottom:7px;
+  list-style-type: decimal;
+}
+hr{
+  background:url(../images/hr.jpg) top center no-repeat;
+  border:0;
+  outline:0;
+  clear:both;
+  height:10px;
+}
+
+/* link styles */
+a:link{
+  color:#444444;
+  text-decoration: none;
+}
+a:visited{
+  color:#444444;
+  text-decoration: none;
+}
+a:hover{
+  color: #1CCCCC;
+  text-decoration: none;
+}
+a:active{
+  color:#444444;
+  text-decoration: none;
+}
+a:focus{
+  outline-style: none;
+}
+
+/* header nav styles */
+#header{
+  background:url(../images/light-bg-row.png) bottom left repeat-x;
+}
+
+#title{
+  margin-top:25px;
+  margin-bottom:15px;
+  color: #464646;
+  clear: both;
+
+  p{
+    font-family:"AbrahamLincoln",Verdana,sans-serif;
+    font-size:60px;
+    text-align: left;
+    font-stretch:expanded;
+    font-weight: normal;
+    line-height: 70px;
+    text-transform: uppercase;
+    border: 1px solid #999;
+    border-right: none;
+    border-left: none;
+    float: left;
+    clear: both;
+    padding:0px;
+    margin:0px;
+    margin-bottom:5px;
+    margin-top:5px;
+    &:hover{
+      color: rgb(28,204,204);
+
+    }
   }
+}
+
+/* post index styles */
+#post-area .post{
+  width: 310px;
+  background: #fff;
+  margin-right:10px;
+  margin-top:15px;
+  position:relative;
+
+  .niss-copy{
+    width:250px; margin-left:auto;
+    margin-right:auto;
+    margin-top:10px;
+    margin-bottom:20px;
+    overflow:hidden;
+    clear:both;
+  }
+  .niss-link{
+    width:150px;
+    border-top:1px dotted #e8e8e8;
+    color:#494e51;
+  }
+}
