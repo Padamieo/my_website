@@ -1,4 +1,10 @@
 
+
+
+
+
+
+
 // masonry code
 $(document).ready(function() {
   $('#post-area').masonry({
@@ -14,7 +20,6 @@ $(document).ready(function() {
 
   });
 });
-
 
 // hover code for index  templates
 $(document).ready(function() {

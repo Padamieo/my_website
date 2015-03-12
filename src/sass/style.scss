@@ -9,11 +9,6 @@ body {
   font-weight:normal;
 }
 
-#wrap {
-  width:94%;
-  margin-left:3%;
-}
-
 /* font styles */
 h1{
   font-size:36px;
@@ -118,24 +113,31 @@ hr{
 }
 
 /* link styles */
-a:link{
-  color:#444444;
-  text-decoration: none;
+a{
+  &:link{
+    color:#444444;
+    text-decoration: none;
+  }
+  &:visited{
+    color:#444444;
+    text-decoration: none;
+  }
+  &:hover{
+    color: #1CCCCC;
+    text-decoration: none;
+  }
+  &:active{
+    color:#444444;
+    text-decoration: none;
+  }
+  &:focus{
+    outline-style: none;
+  }
 }
-a:visited{
-  color:#444444;
-  text-decoration: none;
-}
-a:hover{
-  color: #1CCCCC;
-  text-decoration: none;
-}
-a:active{
-  color:#444444;
-  text-decoration: none;
-}
-a:focus{
-  outline-style: none;
+
+#wrap {
+  width:94%;
+  margin-left:3%;
 }
 
 /* header nav styles */

@@ -83,17 +83,18 @@ module.exports = function(grunt){
 				tasks: ['copy:live']
 			}
 		},
-		uglify:{
+    uglify:{
 			options:{
-				banner: '/*<%= pkg.name %> V<%= pkg.version %> made on <%= grunt.template.today("yyyy-mm-dd") %>*/\r'
+				banner: '/*<%= pkg.name %> V<%= pkg.version %> made on <%= grunt.template.today("yyyy-mm-dd") %>*/\r',
+				mangle: true
 			},
-			my_target: {
-				files: [{
-					expand: true,
-					cwd: 'src/',
-					src: '**/*.js',
-					dest: 'build/wp-content/themes/<%= pkg.name %>/',
-				}]
+			target:{
+				files:{
+					'build/wp-content/themes/<%= pkg.name %>/js/scripts.js': [
+						'src/js/jquery.masonry.min.js',
+            'src/js/functions.js'
+						]
+				}
 			}
 		},
 		cssmin: {
