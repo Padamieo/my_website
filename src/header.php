@@ -27,9 +27,11 @@
     <?php  } ?>
 
     <?php if ($niss_responsive != 'no') { ?>
-    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" href="<?php echo get_template_directory_uri(); ?>/css/mobile.css" />
-	<?php  } ?>
+      <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      -->
+      <!--<link rel="stylesheet" type="text/css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" href="<?php echo get_template_directory_uri(); ?>/css/mobile.css" />
+      -->
+  <?php  } ?>
 
  	<!-- wp head -->
 	<?php wp_head(); ?>
@@ -41,7 +43,7 @@
 				fancybox('gallery');
 			?>
 
-      
+
 				<script type="text/javascript">
                     $(document).ready(function() {
                         $('.fancybox').fancybox({
