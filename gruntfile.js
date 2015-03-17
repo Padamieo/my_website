@@ -6,19 +6,6 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: pkg,
 		copy:{
-			live:{
-				files:[
-					{
-					cwd: 'src/',
-					src: ['**', '!*/*.css', '!*/*.js'],
-					dest: 'build/wp-content/themes/<%= pkg.name %>/',
-					nonull: false,
-					expand: true,
-					flatten: false,
-					filter: 'isFile',
-					}
-				]
-			},
 			build_wordpress:{
 				files:[
 					{
@@ -36,7 +23,7 @@ module.exports = function(grunt){
 				files:[
 					{
 					cwd: 'src/',
-					src: ['**', '!*/*scss', '!*.rb'],
+					src: ['**', '!*/*scss', '!*.rb', '!*/*.css', '!*/*.js', '!*/**.{png,jpg,gif}'],
 					dest: 'build/wp-content/themes/<%= pkg.name %>',
 					nonull: false,
 					expand: true,
@@ -80,7 +67,7 @@ module.exports = function(grunt){
 			},
 			copy:{
 				files: ['src/**/**.php','src/**/**.{png,jpg,gif}'],
-				tasks: ['copy:live']
+				tasks: ['copy:build_theme']
 			}
 		},
     uglify:{
@@ -106,12 +93,17 @@ module.exports = function(grunt){
 				ext: '.css',
 			}
 		},
+    imagemin:{
+			dynamic:{
+				files: [{
+					expand: true,
+					cwd: 'src/images/',
+					src: ['**/*.{png,jpg,gif}'],
+					dest: 'build/wp-content/themes/<%= pkg.name %>/images/',
+				}]
+			}
+		},
 		compass: {
-			live:{
-				options: {
-					config: 'config_live.rb'
-				}
-			},
       new:{
         options:{
           sassDir: 'src/sass',
@@ -124,6 +116,7 @@ module.exports = function(grunt){
         }
       }
 		},
+
 		browserSync: {
 			dev: {
 				bsFiles: {
@@ -142,15 +135,29 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	//grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-newer');
 
 	// Default task(s).
-	grunt.registerTask('build', ['newer:copy:build_wordpress','newer:copy:build_theme','newer:copy:build_plugins']);
-	grunt.registerTask("update", ['newer:copy:live','newer:cssmin','newer:uglify','compass:new']);
+	grunt.registerTask('build', [
+    'newer:copy:build_wordpress',
+    'newer:copy:build_theme',
+    'newer:copy:build_plugins',
+    'newer:cssmin',
+    'newer:uglify',
+    'compass:new'
+  ]);
+
+	grunt.registerTask("update", [
+    'newer:copy:build_theme',
+    'newer:cssmin',
+    'newer:uglify',
+    'compass:new'
+  ]);
+
 	grunt.registerTask("default", ['browserSync', 'watch']);
 
 };

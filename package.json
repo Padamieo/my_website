@@ -5,11 +5,12 @@
 	"private": true,
 	"devDependencies": {
 		"grunt": "~0.4.0",
+		"grunt-contrib-imagemin": "*",
 		"grunt-contrib-compass": "*",
-		"grunt-contrib-copy": "*",
 		"grunt-contrib-cssmin": "*",
-		"grunt-contrib-uglify": "*",
 		"grunt-contrib-clean": "*",
+		"grunt-contrib-copy": "*",
+		"grunt-contrib-uglify": "*",
 		"grunt-contrib-watch": "*",
 		"grunt-browser-sync": "*",
 		"grunt-newer": "*"
