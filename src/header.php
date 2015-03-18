@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
 	<!-- meta -->
-    <html <?php language_attributes();?>>
+  <html <?php language_attributes();?>>
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('sitename'); ?> <?php wp_title(); ?></title>
-
-    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+  <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 	<!-- styles
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -98,6 +97,9 @@
 			}
 		}
 	?>
+
+
+
 </head>
 <body <?php body_class(); ?>>
 <div id="wrap">
