@@ -97,9 +97,9 @@ module.exports = function(grunt){
 			dynamic:{
 				files: [{
 					expand: true,
-					cwd: 'src/images/',
+					cwd: 'src/img/',
 					src: ['**/*.{png,jpg,gif}'],
-					dest: 'build/wp-content/themes/<%= pkg.name %>/images/',
+					dest: 'build/wp-content/themes/<%= pkg.name %>/img/',
 				}]
 			}
 		},
@@ -148,13 +148,16 @@ module.exports = function(grunt){
     'newer:copy:build_plugins',
     'newer:cssmin',
     'newer:uglify',
+    'newer:imagemin',
     'compass:new'
+
   ]);
 
 	grunt.registerTask("update", [
     'newer:copy:build_theme',
     'newer:cssmin',
     'newer:uglify',
+    'newer:imagemin',
     'compass:new'
   ]);
 
