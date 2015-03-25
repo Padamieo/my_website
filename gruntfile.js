@@ -116,11 +116,10 @@ module.exports = function(grunt){
         }
       }
 		},
-
 		browserSync: {
 			dev: {
 				bsFiles: {
-					src : 'build/css/style.css'
+          src : ['build/wp-content/themes/<%= pkg.name %>/**/*.{css,js,php}']
 				},
 				options: {
 					baseDir: "./build",

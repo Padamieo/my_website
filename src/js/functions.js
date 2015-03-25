@@ -1,5 +1,4 @@
 
-
 // masonry code
 $(document).ready(function() {
   $('#post-area').masonry({

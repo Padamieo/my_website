@@ -324,7 +324,7 @@ add_action('add_meta_boxes', 'add_custom_meta_box');
 			'type' => 'post_list',
 			'post_type' => array('post','page')
 		)
-	);
+);
 
 // The Callback
 function show_custom_meta_box() {
