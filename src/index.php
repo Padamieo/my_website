@@ -33,18 +33,24 @@ if (have_posts()) :
 				post_class();
 				echo '>';
 					if ( has_post_thumbnail() ) {
-						echo '<div class="niss-image">';
-							echo '<a class="tint-view" href="'.get_the_permalink().'">';
-								the_post_thumbnail( 'summary-image' );
-							echo '</a>';
-							echo '<div class="niss-category"><p>';
-								the_category(', ');
-							echo '</p></div>';
-						echo '</div>';
-						echo '<div class="clear"></div>';
 
+						//$var = the_post_thumbnail( 'summary-image' );
+						$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'summary-image' );
+
+						echo '<p>'.$image[0].'</p>';
+						echo '<p>'.$image[1].'</p>';
+						echo '<p>'.$image[2].'</p>';
+
+						echo '<div class="niss-image" style="background-image: url('.$image[0].'); height:'.$image[2].'px; width:'.$image[1].'px;">';
+							echo '<a class="tint-view" href="'.get_the_permalink().'">';
+								echo '<div class="niss-category"><p>';
+									the_category(', ');
+								echo '</p></div>';
+							echo '</a>';
+						echo '</div>';
+						//echo '<div class="clear"></div>';
 					}
-						echo '<div class="niss-copy"><h2><a href="'.get_the_permalink().'">'.the_title().'</a>'.get_post_format().'</h2>';
+						echo '<div class="niss-copy"><h2><a href="'.get_the_permalink().'">'.get_the_title().'</a>'.get_post_format().'</h2>';
 						the_excerpt();
 						echo '</div>';
 				echo '</div>';

@@ -204,7 +204,7 @@ a{
   border-bottom: 1px solid #ddd;
   height:57px;
   overflow:hidden;
-  @media screen and (min-width: 0px) and (max-width: 319px) {
+  @media screen and (max-width: 700px) {
     background: green;
     height: auto;
   }
@@ -218,7 +218,7 @@ a{
     clear:both;
 
     li{
-      @media screen and (min-width: 0px) and (max-width: 319px) {
+      @media screen and (max-width: 700px) {
         width: 100%;
       }
       float: left;
@@ -239,7 +239,7 @@ a{
         &:hover {
           background: #FFF;
         }
-        @media screen and (min-width: 0px) and (max-width: 319px) {
+        @media screen and (max-width: 700px) {
           width: 100%;
         }
       }
@@ -295,13 +295,24 @@ a{
 */
 
 .niss-image{
+  position: relative;
 
+  .tint-view{
+    display: block;
+    padding: 0;
+    margin: 0;
+    img{
+      display: block;
+      padding: 0px;
+      margin: 0px;
+    }
+  }
 }
 
 .niss-category{
   position:absolute;
   width:auto;
-  background:#000;
+  background: rgba(0,0,0,0.5);
   bottom: 0px;
   z-index:10;
   height:30px;
@@ -319,9 +330,6 @@ a{
   a{
     color:#fff;
     font-style:italic;
-    &:hover{
-      color:#555;
-    }
   }
 }
 
