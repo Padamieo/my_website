@@ -7,8 +7,7 @@ module.exports = function(grunt){
 		pkg: pkg,
 		copy:{
 			build_wordpress:{
-				files:[
-					{
+				files:[{
 					cwd: 'bower_components/wordpress/',
 					src: ['**'],
 					dest: 'build/',
@@ -16,12 +15,10 @@ module.exports = function(grunt){
 					expand: true,
 					flatten: false,
 					filter: 'isFile',
-					}
-				]
+				}]
 			},
 			build_theme:{
-				files:[
-					{
+				files:[{
 					cwd: 'src/',
 					src: ['**', '!*/*scss', '!*.rb', '!*/*.css', '!*/*.js', '!*/**.{png,jpg,gif}'],
 					dest: 'build/wp-content/themes/<%= pkg.name %>',
@@ -29,12 +26,10 @@ module.exports = function(grunt){
 					expand: true,
 					flatten: false,
 					filter: 'isFile',
-					}
-				]
+				}]
 			},
 			build_plugins:{
-				files:[
-					{
+				files:[{
 					cwd: 'bower_components/',
 					src: [
 						'ninja-forms/**',
@@ -45,8 +40,7 @@ module.exports = function(grunt){
 					expand: true,
 					flatten: false,
 					filter: 'isFile',
-					}
-				]
+				}]
 			}
 		},
 		watch: {
@@ -149,7 +143,6 @@ module.exports = function(grunt){
     'newer:uglify',
     'newer:imagemin',
     'compass:new'
-
   ]);
 
 	grunt.registerTask("update", [
