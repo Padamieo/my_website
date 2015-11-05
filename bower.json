@@ -2,16 +2,12 @@
   "name": "<%= pkg.name %>",
   "version": "<%= pkg.version %>",
   "dependencies": {
-	   "wordpress": "4.1.1",
-      "jquery": "~1.10.2"
+    "wordpress": "4.3.1",
+    "jquery": "~1.10.2"
   },
   "private": true,
   "devDependencies": {
-    "ninja-forms": "https://github.com/wpninjas/ninja-forms.git#2.7.7",
-    "wordpress-seo": "https://github.com/Yoast/wordpress-seo.git",
-    "google-analytics-for-wordpress": "https://github.com/Yoast/google-analytics-for-wordpress.git",
-    "w3-total-cache": "svn+http://plugins.svn.wordpress.org/w3-total-cache/",
-  	"wp-maintenance-mode": "https://github.com/Designmodocom/WP-Maintenance-Mode.git"
-
+    "ninja-forms": "svn+http://plugins.svn.wordpress.org/ninja-forms/#2.9.28",
+    "wordpress-seo": "svn+http://plugins.svn.wordpress.org/wordpress-seo/#2.3.5"
   }
 }

@@ -41,7 +41,22 @@ module.exports = function(grunt){
 					flatten: false,
 					filter: 'isFile',
 				}]
-			}
+			},
+      wordpres_toplevel: {
+        files: [{
+          cwd: 'wordpress/',
+          src: [
+            'BingSiteAuth.xml',
+            'favicon.ico',
+            'google7389dbcbf91df492.html'
+          ],
+          dest: 'build/',
+          nonull: false,
+          expand: true,
+          flatten: false,
+          filter: 'isFile',
+        }]
+      }
 		},
 		watch: {
 			options: {
@@ -59,6 +74,10 @@ module.exports = function(grunt){
 				files: ['src/sass/*.scss'],
 				tasks: ['compass:new']
 			},
+      for_less:{
+        files: "src/less/**/*.less",
+        tasks: ['less', 'newer:cssmin']
+      }
 			copy:{
 				files: ['src/**/**.php','src/**/**.{png,jpg,gif}'],
 				tasks: ['copy:build_theme']
@@ -97,6 +116,19 @@ module.exports = function(grunt){
 				}]
 			}
 		},
+    less: {
+      live: {
+        options: {
+          strictMath: true,
+          sourceMap: true,
+          outputSourceFiles: true,
+          sourceMapURL: 'style.css.map',
+          sourceMapFilename: '<%= pkg.build_location %>/css/style.css.map'
+        },
+        src: 'src/less/style.less',
+        dest: '<%= pkg.build_location %>/css/style.css'
+      }
+    },
 		compass: {
       new:{
         options:{
@@ -110,16 +142,23 @@ module.exports = function(grunt){
         }
       }
 		},
-		browserSync: {
-			dev: {
-				bsFiles: {
-          src : ['build/wp-content/themes/<%= pkg.name %>/**/*.{css,js,php}']
-				},
-				options: {
-					baseDir: "./build",
-					proxy: "localhost/my_website/build/",
-					watchTask: true
-				}
+    clean: {
+			tidy: {
+				src: [
+					"build/*.{php,html,txt}",
+					"!build/wp-config.php",
+					"!build/.htaccess",
+					"build/wp-admin/**",
+					"build/wp-includes/**",
+					"build/wp-content/themes/**",
+					"build/wp-content/plugins/**"
+				]
+			},
+			setup: {
+				src: [
+					"build/*.{html,txt}",
+					"build/wp-config-sample.php"
+				]
 			}
 		}
 	});
@@ -130,8 +169,9 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-compass');
-	grunt.loadNpmTasks('grunt-browser-sync');
+	 grunt.loadNpmTasks('grunt-contrib-compass'); // remove please
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-newer');
 
 	// Default task(s).
@@ -153,6 +193,10 @@ module.exports = function(grunt){
     'compass:new'
   ]);
 
-	grunt.registerTask("default", ['browserSync', 'watch']);
+	grunt.registerTask("default", ['watch']);
+
+  grunt.registerTask("plugins", ['newer:copy:build_plugins','newer:copy:paid_plugins']);
+
+  grunt.registerTask("tidy", ['clean:tidy']);
 
 };
