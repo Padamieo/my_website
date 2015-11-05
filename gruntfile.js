@@ -42,7 +42,7 @@ module.exports = function(grunt){
 					filter: 'isFile',
 				}]
 			},
-      wordpres_toplevel: {
+      wordpress_toplevel: {
         files: [{
           cwd: 'wordpress/',
           src: [
@@ -70,14 +70,10 @@ module.exports = function(grunt){
 				files: ['src/css/*.css'],
 				tasks: ['cssmin']
 			},
-			compass:{
-				files: ['src/sass/*.scss'],
-				tasks: ['compass:new']
-			},
-      for_less:{
+      less:{
         files: "src/less/**/*.less",
         tasks: ['less', 'newer:cssmin']
-      }
+      },
 			copy:{
 				files: ['src/**/**.php','src/**/**.{png,jpg,gif}'],
 				tasks: ['copy:build_theme']
@@ -123,10 +119,10 @@ module.exports = function(grunt){
           sourceMap: true,
           outputSourceFiles: true,
           sourceMapURL: 'style.css.map',
-          sourceMapFilename: '<%= pkg.build_location %>/css/style.css.map'
+          sourceMapFilename: 'build/wp-content/themes/<%= pkg.name %>/css/style.css.map'
         },
         src: 'src/less/style.less',
-        dest: '<%= pkg.build_location %>/css/style.css'
+        dest: 'build/wp-content/themes/<%= pkg.name %>/css/style.css'
       }
     },
 		compass: {
@@ -174,7 +170,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-newer');
 
-	// Default task(s).
+	// Default build task creating everything on the site
 	grunt.registerTask('build', [
     'newer:copy:build_wordpress',
     'newer:copy:build_theme',
@@ -182,15 +178,18 @@ module.exports = function(grunt){
     'newer:cssmin',
     'newer:uglify',
     'newer:imagemin',
-    'compass:new'
+    'compass:new',
+    'less:live'
   ]);
 
+  // updates everything theme related
 	grunt.registerTask("update", [
     'newer:copy:build_theme',
     'newer:cssmin',
     'newer:uglify',
     'newer:imagemin',
-    'compass:new'
+    'compass:new',
+    'less:live'
   ]);
 
 	grunt.registerTask("default", ['watch']);
