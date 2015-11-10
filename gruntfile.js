@@ -82,12 +82,14 @@ module.exports = function(grunt){
     uglify:{
 			options:{
 				banner: '/*<%= pkg.name %> V<%= pkg.version %> made on <%= grunt.template.today("yyyy-mm-dd") %>*/\r',
-				mangle: true
+				mangle: true,
+        beautify: true
 			},
 			target:{
 				files:{
 					'build/wp-content/themes/<%= pkg.name %>/js/scripts.js': [
-						'src/js/jquery.masonry.min.js',
+						'bower_components/masonry/dist/masonry.pkgd.js',
+            'bower_components/fancyBox/source/jquery.fancybox.js',
             'src/js/functions.js'
 						]
 				}
@@ -193,6 +195,8 @@ module.exports = function(grunt){
   ]);
 
 	grunt.registerTask("default", ['watch']);
+
+  grunt.registerTask("css", ['less:live']);
 
   grunt.registerTask("plugins", ['newer:copy:build_plugins','newer:copy:paid_plugins']);
 

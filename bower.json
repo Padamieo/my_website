@@ -3,7 +3,9 @@
   "version": "<%= pkg.version %>",
   "dependencies": {
     "wordpress": "4.3.1",
-    "jquery": "~1.10.2"
+    "jquery": "~1.10.2",
+    "masonry": "3.3.2",
+    "fancyBox": "2.1.5"
   },
   "private": true,
   "devDependencies": {

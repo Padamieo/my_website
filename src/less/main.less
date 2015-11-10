@@ -9,8 +9,20 @@ body {
 }
 
 /* font styles */
+@font-face {
+  font-family: 'hero_lightlight';
+  src: url('../fonts/Hero-Light-webfont.eot');
+  src: url('../fonts/Hero-Light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Hero-Light-webfont.woff2') format('woff2'),
+  url('../fonts/Hero-Light-webfont.woff') format('woff'),
+  url('../fonts/Hero-Light-webfont.ttf') format('truetype'),
+  url('../fonts/Hero-Light-webfont.svg#hero_lightlight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 h1{
-  font-size:36px;
+  font-size: @font-size-h1;
   line-height:41px;
   color:#000000;
   padding:0px;
@@ -342,6 +354,7 @@ a{
 
 /* post index styles */
 #post-area{
+  margin: auto;
   .post{
     width: 310px;
     background: #fff;
@@ -386,13 +399,13 @@ a{
   }
 }
 .avatar{
-  display:none;
+  //display:none;
 }
 .reply{
-  display:none;
+  //display:none;
 }
 .comment-meta{
-  display:none;
+  //display:none;
 }
 .comment-author{
   font-size:16px;
@@ -412,43 +425,49 @@ a{
   color:#555;
   font-size:12px;
 }
-.comment-input{
-  clear:both;
-  border:1px solid #8e8e8e;
-  margin-bottom:5px;
-  width:90%;
-  padding:7px;
-  font-family:Arial, Helvetica, sans-serif;
-  color:#555;
-  font-size:12px;
+.comment{
+  &-input{
+    clear:both;
+    border:1px solid #8e8e8e;
+    margin-bottom:5px;
+    width:90%;
+    padding:7px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#555;
+    font-size:12px;
+  }
+  &-submit{
+    clear:both;
+    width:120px;
+    height:30px;
+    line-height:25px;
+    background:#e5e5e5;
+    border:1px solid #8e8e8e;
+  }
 }
-.comment-submit{
-  clear:both;
-  width:120px;
-  height:30px;
-  line-height:25px;
-  background:#e5e5e5;
-  border:1px solid #8e8e8e;
-}
+
 
 /* Additional and WordPress styles */
 .clear{
   clear:both;
 }
-.aligncenter{
-  display: block;
-  margin: 0 auto;
+.align{
+  &center{
+    display: block;
+    margin: 0 auto;
+  }
+  &left{
+    float: left;
+    margin-right:20px;
+    margin-top:20px;
+    margin-bottom:10px;
+  }
+  &right{
+    float: right;
+    margin: 0 0 20px 20px;
+  }
 }
-.alignleft{
-  float: left;
-  margin-right:20px;
-  margin-top:20px;
-  margin-bottom:10px;
-}
-.alignright{
-  float: right;
-  margin: 0 0 20px 20px;
-}
+
 .wp-caption{
   text-align: left;
   margin-top:5px;
@@ -524,10 +543,18 @@ blockquote{
     color:#454545;
     line-height:18px;
     font-family:'Helvetica',Arial, Helvetica, sans-serif;
-    h3{ color:#858585;}
-    p{ color:#000;}
-    ul{ margin-left:0px;}
-    li{ color:#858585; }
+    h3{
+      color:#858585;
+    }
+    p{
+      color:#000;
+    }
+    ul{
+      margin-left:0px;
+    }
+    li{
+      color:#858585;
+    }
     a{
       color:#444444;
       &:hover{
