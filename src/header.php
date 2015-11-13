@@ -15,14 +15,14 @@
 			$niss_color_scheme = $options['niss_color_scheme'];
 			//$niss_logo = $options['niss_logo'];
 			//$niss_responsive = $options['niss_responsive'];
-	?>
+    ?>
 
-   <?php if ($niss_color_scheme == 'dark') { ?>
-    	<!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/dark.css" />-->
-	<?php  } elseif ($niss_color_scheme == 'custom') {  ?>
-    	<!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/custom.css"/>-->
+    <?php if ($niss_color_scheme == 'dark') { ?>
+      <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/dark.css" />-->
+	  <?php  } elseif ($niss_color_scheme == 'custom') {  ?>
+      <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/custom.css"/>-->
     <?php   } else {?>
-         <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/light.css"/>-->
+      <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/light.css"/>-->
     <?php  } ?>
 
     <?php if ($niss_responsive != 'no') { ?>
@@ -37,12 +37,9 @@
     <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
 
 	<!--fancybox-->
-	<?php if(!is_front_page() ){
-			if(get_post_format() == 'gallery'){
-				fancybox('gallery');
-			?>
+	<?php if(!is_front_page() ){ ?>
 
-
+      <!--
 				<script type="text/javascript">
                     $(document).ready(function() {
                         $('.fancybox').fancybox({
@@ -67,11 +64,9 @@
                         });
                     });
                 </script>
-    		<?php
-            }else{
-				//echo '<!--'.get_post_format().'-->'; //for determining if video / unity later
-				fancybox('regular');
-			?>
+        -->
+
+      <!--
 				<script type="text/javascript">
                     $(document).ready(function() {
                         $('.fancybox').fancybox({
@@ -93,8 +88,8 @@
                         });
                     });
                 </script>
+      -->
 			<?php
-			}
 		}
 	?>
 

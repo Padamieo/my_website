@@ -39,29 +39,29 @@
 		core_mods();
 	}
 
-	// Load Fancybox setups
-	function fancybox($input){
-
-			wp_register_script('jquery.fancybox', (get_template_directory_uri()."/js/jquery.fancybox.js"),'jquery',false,false);
-			wp_register_script('jquery.fancybox_gallery', (get_template_directory_uri()."/js/jquery.fancybox_gallery.js"),false,true);
-			wp_register_script('jquery.fancybox_regular', (get_template_directory_uri()."/js/jquery.fancybox_regular.js"),false,true);
-
-			wp_register_style('jquery.fancybox_style', (get_template_directory_uri()."/css/jquery.fancybox.css"),false,false,false);
-			wp_register_style('jquery.fancybox_style_buttons', (get_template_directory_uri()."/css/jquery.fancybox_buttons.css"),false,false,false);
-
-			if($input == 'gallery'){
-				wp_enqueue_script('jquery.fancybox');
-				wp_enqueue_script('jquery.fancybox_gallery');
-				wp_enqueue_style('jquery.fancybox_style');
-				wp_enqueue_style('jquery.fancybox_style_buttons');
-			}elseif($input == 'regular'){
-				wp_enqueue_script('jquery.fancybox');
-				wp_enqueue_script('jquery.fancybox_regular');
-				wp_enqueue_style('jquery.fancybox_style');
-				wp_enqueue_style('jquery.fancybox_style_buttons');
-			}
-
-	}
+	// // Load Fancybox setups
+	// function fancybox($input){
+	//
+	// 		wp_register_script('jquery.fancybox', (get_template_directory_uri()."/js/jquery.fancybox.js"),'jquery',false,false);
+	// 		wp_register_script('jquery.fancybox_gallery', (get_template_directory_uri()."/js/jquery.fancybox_gallery.js"),false,true);
+	// 		wp_register_script('jquery.fancybox_regular', (get_template_directory_uri()."/js/jquery.fancybox_regular.js"),false,true);
+	//
+	// 		wp_register_style('jquery.fancybox_style', (get_template_directory_uri()."/css/jquery.fancybox.css"),false,false,false);
+	// 		wp_register_style('jquery.fancybox_style_buttons', (get_template_directory_uri()."/css/jquery.fancybox_buttons.css"),false,false,false);
+	//
+	// 		if($input == 'gallery'){
+	// 			wp_enqueue_script('jquery.fancybox');
+	// 			wp_enqueue_script('jquery.fancybox_gallery');
+	// 			wp_enqueue_style('jquery.fancybox_style');
+	// 			wp_enqueue_style('jquery.fancybox_style_buttons');
+	// 		}elseif($input == 'regular'){
+	// 			wp_enqueue_script('jquery.fancybox');
+	// 			wp_enqueue_script('jquery.fancybox_regular');
+	// 			wp_enqueue_style('jquery.fancybox_style');
+	// 			wp_enqueue_style('jquery.fancybox_style_buttons');
+	// 		}
+	//
+	// }
 
 
 	// content width
