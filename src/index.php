@@ -12,11 +12,8 @@ if (have_posts()) :
 					if ( has_post_thumbnail() ) {
 
 						//$var = the_post_thumbnail( 'summary-image' );
-						$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'summary-image' );
 
-						//echo '<p>'.$image[0].'</p>';
-						//echo '<p>'.$image[1].'</p>';
-						//echo '<p>'.$image[2].'</p>';
+						$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'summary-image' );
 
 						echo '<div class="niss-image" style="background-image: url('.$image[0].'); height:'.$image[2].'px; width:'.$image[1].'px;">';
 

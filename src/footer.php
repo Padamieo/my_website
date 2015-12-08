@@ -1,22 +1,20 @@
-	
 
-<?php if ( is_active_sidebar( 'niss_footer')) { ?>     
-   <div id="footer-area">
-			<?php dynamic_sidebar( 'niss_footer' ); ?>
-        </div><!-- // footer area -->   
-<?php }  ?>     
-      
+	<?php
+		if ( is_active_sidebar( 'niss_footer')) {
+	  	echo '<div id="footer-area">';
+			dynamic_sidebar( 'niss_footer' );
+	    echo '</div>';
+		}
+	?>
 
+	<div id="copyright">
+		<p>&copy; <?php echo date("Y").' '.bloginfo("name").' | <a href="mailto:'.antispambot("michaeladamlockwood@googlemail.com?Subject=Hello").'" title="Contact e-mail address" target="_blank">moc.liamelgoog@doowkcolmadaleahcim</a></p>';
+		?>
+	</div>
 
- <div id="copyright">
- <p>&copy; <?php echo date("Y"); echo " "; bloginfo('name'); ?> | <a href="mailto:<?php echo antispambot("michaeladamlockwood@googlemail.com?Subject=Hello")?>" title="Contact e-mail address" target="_blank">moc.liamelgoog@doowkcolmadaleahcim</a></p>
- <?php
- ?>
- </div><!-- // copyright -->   
-     
-</div><!-- // wrap -->   
+</div><!-- // wrap -->
 
 	<?php wp_footer(); ?>
-	
+
 </body>
 </html>

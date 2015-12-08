@@ -4,26 +4,17 @@
   <html <?php language_attributes();?>>
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('sitename'); ?> <?php wp_title(); ?></title>
-  <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 	<!-- styles
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
      <link rel="stylesheet" type="text/css" media="all" href="<?php //echo get_template_directory_uri(); ?>/css/reset.css" />
 	 -->
 
-    <?php  $options = get_option('plugin_options');
-			$niss_color_scheme = $options['niss_color_scheme'];
-			//$niss_logo = $options['niss_logo'];
-			//$niss_responsive = $options['niss_responsive'];
+    <?php
+      $options = get_option('plugin_options');
+      //$niss_logo = $options['niss_logo'];
+      //$niss_responsive = $options['niss_responsive'];
     ?>
-
-    <?php if ($niss_color_scheme == 'dark') { ?>
-      <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/dark.css" />-->
-	  <?php  } elseif ($niss_color_scheme == 'custom') {  ?>
-      <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/custom.css"/>-->
-    <?php   } else {?>
-      <!--<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/light.css"/>-->
-    <?php  } ?>
 
     <?php if ($niss_responsive != 'no') { ?>
       <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />

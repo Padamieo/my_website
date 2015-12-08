@@ -1,11 +1,11 @@
 <?php
 
 	// Add RSS links to <head> section
-	add_theme_support('automatic-feed-links') ;
+	//add_theme_support('automatic-feed-links') ;
 
   // Load websites CSS and fonts
-  add_action("wp_enqueue_scripts", "site_style_enqueue", 1);
-  function site_style_enqueue() {
+  add_action("wp_enqueue_scripts", "enqueue_niss_styles", 1);
+  function enqueue_niss_styles() {
   	if ( !is_admin() ) {
   		wp_register_style('css.style', (get_template_directory_uri()."/css/style.css"),false,false,false);
   		//wp_register_style('font.ubuntu', ('http://fonts.googleapis.com/css?family=Ubuntu:300,400,700'),false,false,false);
@@ -16,28 +16,18 @@
   	}
   }
 
-	// Load jQuery
-	if ( !function_exists('core_mods') ) {
-		function core_mods() {
-			if ( !is_admin() ) {
-				wp_deregister_script('jquery');
-				wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"));
+	function enqueue_niss_scripts() {
+	if ( !is_admin() ) {
+	  wp_deregister_script('jquery');
 
-				//wp_register_script('jquery.masonry', (get_template_directory_uri()."/js/jquery.masonry.min.js"),'jquery',false,true);
-				//wp_register_script('niss.functions', (get_template_directory_uri()."/js/functions.js"),'jquery.masonry',false,true);
+	  wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js", false, null, false);
+		wp_register_script('niss_scripts', get_template_directory_uri() . '/js/scripts.js', 'jquery',  null, false);
 
-				wp_register_script('jquery.scripts', (get_template_directory_uri()."/js/scripts.js"),'jquery',false,true);
-
-				wp_enqueue_script('jquery');
-
-				//wp_enqueue_script('jquery.masonry');
-				//wp_enqueue_script('niss.functions');
-
-				wp_enqueue_script('jquery.scripts');
-			}
-		}
-		core_mods();
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('niss_scripts');
 	}
+}
+add_action("wp_enqueue_scripts", "enqueue_niss_scripts", 0);
 
 	// // Load Fancybox setups
 	// function fancybox($input){
@@ -62,6 +52,34 @@
 	// 		}
 	//
 	// }
+
+	//make scripts load asynchronously
+	function make_script_async( $tag, $handle, $src ){
+	  if ( !is_admin() ) {
+	    return str_replace( ' src', 'defer="defer" src', $tag );
+	  }else{
+	    return $tag;
+	  }
+	}
+	add_filter( 'script_loader_tag', 'make_script_async', 10, 3 );
+
+	//this will check if site is live or not
+	function is_live(){
+		if('http://www.nothingisstillsomething.co.uk' == get_site_url()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	//add livereload script to the footer provided sites not live
+	function livereload() {
+	  if(!is_live()){
+	    wp_enqueue_script( 'livereload', '//localhost:35729/livereload.js', false, false, true );
+	  }
+	}
+	add_action( 'wp_enqueue_scripts', 'livereload' );
+
 
 
 	// content width
@@ -107,13 +125,13 @@
 
 	// hide blank excerpts
 	function custom_excerpt_length( $length ) {
-	return 0;
+		return 0;
 	}
 	add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 	function new_excerpt_more($more) {
-       global $post;
-	return '';
+    global $post;
+		return '';
 	}
 	add_filter('excerpt_more', 'new_excerpt_more');
 
@@ -234,11 +252,9 @@ function myplugin_save_meta_box_data( $post_id ) {
 
 	// Check the user's permissions.
 	if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
-
 		if ( ! current_user_can( 'edit_page', $post_id ) ) {
 			return;
 		}
-
 	} else {
 
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
@@ -288,8 +304,7 @@ function special_attachment($size = thumbnail) {
 				$image_type = get_post_meta($image->ID, 'custom_radio', true);
 
 				//echo $image_type; USED FOR TESTING
-				if($image_type == 1 || $image_type == '')
-				{
+				if($image_type == 1 || $image_type == ''){
 					//Video
 					$image_url   = wp_get_attachment_url($image->ID);
 					$image_title = apply_filters('the_title',$image->post_title);
@@ -303,8 +318,7 @@ function special_attachment($size = thumbnail) {
 					echo $content;
 
 
-					if($image_fancybox == 'on')
-					{
+					if($image_fancybox == 'on'){
 						//CLEAN UP!
 						echo '<a class="fancybox" href="'.$image_url.'" title="'.$image_title.'">View Ci';
 						echo '</a>';
@@ -314,12 +328,9 @@ function special_attachment($size = thumbnail) {
 					//echo $image_excerpt;
 					//echo $image_title;
 				}
-				elseif($image_type == 2)
-				{
+				elseif($image_type == 2){
 					//webgl - future projects
-				}
-				else
-				{
+				}else{
 					//unity3d - needs to insert into header somehow
 				}
 			}
