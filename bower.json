@@ -9,7 +9,7 @@
   },
   "private": true,
   "devDependencies": {
-    "ninja-forms": "svn+http://plugins.svn.wordpress.org/ninja-forms/#2.9.28",
+    "ninja-forms": "svn+http://plugins.svn.wordpress.org/ninja-forms/#2.9.37",
     "wordpress-seo": "svn+http://plugins.svn.wordpress.org/wordpress-seo/#2.3.5"
   }
 }
