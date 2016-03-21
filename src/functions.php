@@ -65,7 +65,7 @@ add_action("wp_enqueue_scripts", "enqueue_niss_scripts", 0);
 
 	//this will check if site is live or not
 	function is_live(){
-		if('http://www.nothingisstillsomething.co.uk' == get_site_url()){
+		if('http://nothingisstillsomething.co.uk' == get_site_url()){
 			return true;
 		}else{
 			return false;
@@ -79,8 +79,6 @@ add_action("wp_enqueue_scripts", "enqueue_niss_scripts", 0);
 	  }
 	}
 	add_action( 'wp_enqueue_scripts', 'livereload' );
-
-
 
 	// content width
 	if ( !isset( $content_width ))  {

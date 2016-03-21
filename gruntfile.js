@@ -180,7 +180,6 @@ module.exports = function(grunt){
     'newer:cssmin',
     'newer:uglify',
     'newer:imagemin',
-    'compass:new',
     'less:live'
   ]);
 
@@ -190,7 +189,6 @@ module.exports = function(grunt){
     'newer:cssmin',
     'newer:uglify',
     'newer:imagemin',
-    'compass:new',
     'less:live'
   ]);
 

@@ -8,7 +8,7 @@
 	?>
 
 	<div id="copyright">
-		<p>&copy; <?php echo date("Y").' '.bloginfo("name").' | <a href="mailto:'.antispambot("michaeladamlockwood@googlemail.com?Subject=Hello").'" title="Contact e-mail address" target="_blank">moc.liamelgoog@doowkcolmadaleahcim</a></p>';
+		<p>&copy; <?php echo date("Y").'  '.bloginfo("name").' | <a href="mailto:'.antispambot("michaeladamlockwood@googlemail.com?Subject=Hello").'" title="Contact e-mail address" target="_blank">moc.liamelgoog@doowkcolmadaleahcim</a></p>';
 		?>
 	</div>
 
