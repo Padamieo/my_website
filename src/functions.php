@@ -97,8 +97,8 @@ add_action("wp_enqueue_scripts", "enqueue_niss_scripts", 0);
 
 	// Niss post thumbnails
 	add_theme_support( 'post-thumbnails' );
-		add_image_size('summary-image', 310, 9999);
-		add_image_size('detail-image', 770, 9999);
+	add_image_size('summary-image', 310, 9999);
+	add_image_size('detail-image', 770, 9999);
 
 
     // menu
@@ -189,12 +189,7 @@ function myplugin_add_meta_box() {
 	$screens = array( 'post' );
 
 	foreach ( $screens as $screen ) {
-		add_meta_box(
-			'myplugin_sectionid',
-			__( 'My Post Section Title', 'myplugin_textdomain' ),
-			'myplugin_meta_box_callback',
-			$screen
-		);
+		add_meta_box( 'myplugin_sectionid',	__( 'My Post Section Title', 'myplugin_textdomain' ), 'myplugin_meta_box_callback', $screen );
 	}
 }
 add_action( 'add_meta_boxes', 'myplugin_add_meta_box' );
