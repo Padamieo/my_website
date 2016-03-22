@@ -2,10 +2,11 @@
   "name": "<%= pkg.name %>",
   "version": "<%= pkg.version %>",
   "dependencies": {
-    "wordpress": "4.4",
+    "wordpress": "*",
     "jquery": "~1.10.2",
     "masonry": "3.3.2",
-    "fancyBox": "2.1.5"
+    "fancyBox": "2.1.5",
+    "swipebox": "*"
   },
   "private": true,
   "devDependencies": {
