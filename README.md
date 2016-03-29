@@ -26,12 +26,12 @@ Run the following commands from the repo's root directory:
 ###Other Avaliable Grunt commands
 
 * grunt watch
-  * watches the src directory for changes, updates build folder as necessary so your local site is always running your latest code
+  * watches the src folder for changes, updates the build folder as necessary so your local site is always running your last changes.
 * grunt build
-  * creates the build folder, giving you a local version of the site
+  * creates the build folder, giving you a local wordpress folder setup with plugins and theme.
 * grunt update
   * Updates the build folder with every static resource change (so images, css, js, etc)
 * grunt plugins
-  * copies plugins into the build folder
+  * copies plugins into the build folder "wordpress" location.
 * grunt tidy
-	* removes the build folder
+	* removes the build folder and content, except wp-config.php and uploads.
