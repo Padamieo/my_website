@@ -19,5 +19,8 @@
 	"dependencies": {
 		"time-grunt": "*",
 		"bower": "*"
+	},
+	"scripts": {
+		"postinstall": "node_modules/.bin/bower install"
 	}
 }
