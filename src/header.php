@@ -90,25 +90,16 @@
 <body <?php body_class(); ?>>
 <div id="wrap">
 	<div id="header">
-		<div id="title">
-			<a href="<?php echo home_url(); ?>/" title="<?php get_bloginfo( 'name' ); ?>" rel="home">
-			<p><?php bloginfo('sitename'); ?></p>
-			</a>
-
-			<?php /*
-				<a href="<?php echo home_url( '/' ); ?>"  title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-
-					 <?php if ($niss_logo != '') {?>
-						 <img src="<?php echo $niss_logo; ?>" alt="<?php bloginfo('sitename'); ?>">
-					 <?php } else { ?>
-						   <img src="<?php echo get_template_directory_uri(); ?>/images/light/logo.png" alt="<?php bloginfo('sitename'); ?>">
-					 <?php } ?>
-				</a>
-			*/?>
-		</div>
-		<div class="subtitle">
-			<p><?php bloginfo('description'); ?></p>
-		</div>
+		<div id="titles">
+      <div id="title">
+        <a href="<?php echo home_url(); ?>/" title="<?php get_bloginfo( 'name' ); ?>" rel="home">
+          <p>NOTHING IS STILL<span>SOMETHING</span></p><?php /* bloginfo('sitename'); */ ?>
+        </a>
+      </div>
+  		<div class="subtitle">
+  			<p><?php bloginfo('description'); ?></p>
+  		</div>
+    </div>
 
        <?php if ( has_nav_menu( 'main_nav' ) ) { ?>
   		 <div id="nav"><?php wp_nav_menu( array( 'theme_location' => 'main_nav' ) ); ?></div>

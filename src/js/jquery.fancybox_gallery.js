@@ -13,10 +13,10 @@
  *     });
  *
  */
-(function ($) {
+//(function ($) {
 	//Shortcut for fancyBox object
 	var F = $.fancybox;
-	
+
 	//Add helper object
 	F.helpers.buttons = {
 		defaults : {
@@ -31,7 +31,7 @@
 			//Increase top margin to give space for buttons
 			obj.margin[ opts.position === 'bottom' ? 2 : 0 ] += 30;
 		},
-		
+
 		afterShow: function (opts, obj) {
 			var buttons = this.buttons;
 
@@ -91,5 +91,6 @@
 			this.buttons = null;
 		}
 	};
+	console.log("boop");
 
-}(jQuery));
+//}(jQuery));

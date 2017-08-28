@@ -24,10 +24,10 @@
        </div>
 	   */ ?>
 	<?php endwhile; endif; ?>
-
-       <div class="post-nav">
-               <div class="post-prev"><?php previous_post_link('%link'); ?> </div>
-			   <div class="post-next"><?php next_post_link('%link'); ?></div>
-        </div>
-
+	<?php /*
+		<div class="post-nav">
+		<div class="post-prev"><?php previous_post_link('%link'); ?> </div>
+		<div class="post-next"><?php next_post_link('%link'); ?></div>
+		</div>
+	*/ ?>
 <?php get_footer(); ?>

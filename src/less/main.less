@@ -1,9 +1,8 @@
 
-
 body {
-  background:#eee;
-  font-size:12px;
-  line-height:20px;
+  background: @background_colour;
+  font-size: 12px;
+  line-height: 20px;
   font-family: @site_font_family;
   font-weight:normal;
 }
@@ -11,14 +10,16 @@ body {
 /* font styles */
 @font-face {
   font-family: 'hero_lightlight';
-  src: url('../fonts/Hero-Light-webfont.eot');
-  src: url('../fonts/Hero-Light-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Hero-Light-webfont.woff2') format('woff2'),
-  url('../fonts/Hero-Light-webfont.woff') format('woff'),
-  url('../fonts/Hero-Light-webfont.ttf') format('truetype'),
-  url('../fonts/Hero-Light-webfont.svg#hero_lightlight') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  // src: url('../fonts/Hero-Light-webfont.eot');
+  // src: url('../fonts/Hero-Light-webfont.eot?#iefix') format('embedded-opentype'),
+  // url('../fonts/Hero-Light-webfont.woff2') format('woff2'),
+  // url('../fonts/Hero-Light-webfont.woff') format('woff'),
+  // url('../fonts/Hero-Light-webfont.ttf') format('truetype'),
+  // url('../fonts/Hero-Light-webfont.svg#hero_lightlight') format('svg');
+  // font-weight: normal;
+  // font-style: normal;
+
+  src: url('../fonts/Intro.otf');
 }
 
 h1{
@@ -151,48 +152,54 @@ a{
   margin-left:3%;
 }
 
-#title{
+#titles{
   margin-top:25px;
   margin-bottom:15px;
   color: #464646;
-  clear: both;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 700px) {
+    display: block;
+  }
+  #title{
+    p{
+      //font-family:"AbrahamLincoln",Verdana,sans-serif;
+      font-family: 'hero_lightlight';
+      font-size: 3vw;
+      text-align: left;
+      clear: both;
+      padding: 0px;
+      margin: 0px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      line-height: 0.8;
+      @media screen and (max-width: 1200px) {
+        font-size: 37px;
+      }
+      span{
+        font-size: 4.5vw;
+        color: @teal;
+        display: block;
+        @media screen and (max-width: 1200px) {
+          font-size: 55px;
+        }
+      }
+      &:hover{
+        color: @teal;
 
-  p{
-    //font-family:"AbrahamLincoln",Verdana,sans-serif;
-    font-family: 'hero_lightlight';
-    font-size: 6vw;
-    text-align: center;
-    font-stretch:expanded;
-    font-weight: normal;
-    line-height: 6vw;
-    text-transform: uppercase;
-    border: 1px solid #999;
-    border-right: none;
-    border-left: none;
-    clear: both;
-    padding:0px;
-    margin:0px;
-    margin-bottom:5px;
-    margin-top:5px;
-    &:hover{
-      color: rgb(28,204,204);
-
+      }
     }
   }
 
-}
+  .subtitle {
+    color: #000;
+    clear: both;
+    @media screen and (min-width: 700px) {
+      padding-left: 20px;
+    }
 
-.subtitle {
-  color: #000;
-  clear: both;
-  p{
-    font-family: 'hero_lightlight';
-    margin: 0px;
-    padding: 0px;
-    font-size: 16px;
-    font-weight: normal;
-    text-align: left;
   }
+
 }
 
 
@@ -200,7 +207,6 @@ a{
   width:100%;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  height:57px;
   overflow:hidden;
 
   @media screen and (max-width: 700px) {
@@ -218,7 +224,7 @@ a{
 
     li{
       &:first-child{
-        margin: 8px 4px 4px 0px;
+        margin: 8px 4px 8px 0px
       }
 
       @media screen and (max-width: 700px) {
@@ -235,7 +241,8 @@ a{
       padding:0px;
       border: 1px solid #ddd;
       &.current_page_item{
-        border: 1px solid #fff;
+        border: 1px solid @teal;
+
       }
 
       a{
@@ -265,7 +272,6 @@ a{
     width: 100%;
   }
   background:#FFF;
-  margin: auto;
   margin-top:15px;
   display: block;
 }
@@ -361,7 +367,6 @@ a{
 
 /* post index styles */
 #post-area{
-  margin: auto;
   .post{
     width: 310px;
     background: #fff;
@@ -542,7 +547,7 @@ blockquote{
   padding-top:10px;
   margin-top:20px;
   clear:both;
-  border-top: 1px solid pink;
+  border-top: 1px solid @teal;
 
   .widget{
     width:310px;

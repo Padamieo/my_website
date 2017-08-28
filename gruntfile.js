@@ -6,6 +6,7 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: pkg,
 		copy:{
+
 			build_wordpress:{
 				files:[{
 					cwd: 'bower_components/wordpress/',
@@ -17,6 +18,7 @@ module.exports = function(grunt){
 					filter: 'isFile',
 				}]
 			},
+
 			build_theme:{
 				files:[{
 					cwd: 'src/',
@@ -28,6 +30,7 @@ module.exports = function(grunt){
 					filter: 'isFile',
 				}]
 			},
+
 			build_plugins:{
 				files:[{
 					cwd: 'bower_components/',
@@ -42,6 +45,7 @@ module.exports = function(grunt){
 					filter: 'isFile',
 				}]
 			},
+
       wordpress_toplevel: {
         files: [{
           cwd: 'wordpress/',
@@ -58,6 +62,7 @@ module.exports = function(grunt){
         }]
       }
 		},
+
 		watch: {
 			options: {
 			  livereload: true,
@@ -79,6 +84,7 @@ module.exports = function(grunt){
 				tasks: ['copy:build_theme']
 			}
 		},
+
     uglify:{
 			options:{
 				banner: '/*<%= pkg.name %> V<%= pkg.version %> made on <%= grunt.template.today("yyyy-mm-dd") %>*/\r',
@@ -89,12 +95,13 @@ module.exports = function(grunt){
 				files:{
 					'build/wp-content/themes/<%= pkg.name %>/js/scripts.js': [
 						'bower_components/masonry/dist/masonry.pkgd.js',
-            'bower_components/fancyBox/source/jquery.fancybox.js',
+            'bower_components/swipebox/src/js/jquery.swipebox.js',
             'src/js/functions.js'
 						]
 				}
 			}
 		},
+
 		cssmin: {
 			minify: {
 				expand: true,
@@ -104,6 +111,7 @@ module.exports = function(grunt){
 				ext: '.css',
 			}
 		},
+
     imagemin:{
 			dynamic:{
 				files: [{
@@ -114,6 +122,7 @@ module.exports = function(grunt){
 				}]
 			}
 		},
+
     less: {
       live: {
         options: {
@@ -127,19 +136,7 @@ module.exports = function(grunt){
         dest: 'build/wp-content/themes/<%= pkg.name %>/css/style.css'
       }
     },
-		compass: {
-      new:{
-        options:{
-          sassDir: 'src/sass',
-          cssDir: 'build/wp-content/themes/<%= pkg.name %>/css',
-          imagesPath: 'src/img',
-          javascriptsPath: 'src/js',
-          fontsPath: 'src/fonts',
-          outputStyle: 'compressed',
-          environment: 'production'
-        }
-      }
-		},
+
     clean: {
 			tidy: {
 				src: [
@@ -159,6 +156,7 @@ module.exports = function(grunt){
 				]
 			}
 		}
+
 	});
 
 	// Load the grunt plugins we'll need
@@ -167,7 +165,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	 grunt.loadNpmTasks('grunt-contrib-compass'); // remove please
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-newer');
@@ -177,7 +174,7 @@ module.exports = function(grunt){
     'newer:copy:build_wordpress',
     'newer:copy:build_theme',
     'newer:copy:build_plugins',
-    'newer:cssmin',
+    // 'newer:cssmin',
     'newer:uglify',
     'newer:imagemin',
     'less:live'
@@ -186,7 +183,7 @@ module.exports = function(grunt){
   // updates everything theme related
 	grunt.registerTask("update", [
     'newer:copy:build_theme',
-    'newer:cssmin',
+    // 'newer:cssmin',
     'newer:uglify',
     'newer:imagemin',
     'less:live'
