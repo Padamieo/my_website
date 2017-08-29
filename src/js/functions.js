@@ -23,6 +23,23 @@ function sizesettings(){
   if(count === 1){
     $(".gallery").css({"width": "100%"});
   }else{
+
+    /*
+    if(count % 2 == 0){
+      if(count <= 4){
+        $(".gallery").css({"width": "50%"});
+      }else{
+        $(".gallery").css({"width": "25%"});
+        $('#niss-image .gallery').slice(-2).css({"width": "50%"});
+        $('#niss-image .gallery').slice(0, 2).css({"width": "50%"});
+      }
+
+    }else{
+      $(".gallery").css({"width": "33.3%"});
+    }
+    */
+
+
     if(count % 3 == 0){
 
 			if(count > 9){
@@ -61,13 +78,14 @@ function sizesettings(){
 			}
 
 		}
+
+
   }
 
 	// }else{
 	// 	$(".gallery").css({"width": "100%"});
 	// }
 };
-
 
 /*
 function sizesettings(){

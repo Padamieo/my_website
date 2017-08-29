@@ -9,17 +9,15 @@ body {
 
 /* font styles */
 @font-face {
-  font-family: 'hero_lightlight';
-  // src: url('../fonts/Hero-Light-webfont.eot');
-  // src: url('../fonts/Hero-Light-webfont.eot?#iefix') format('embedded-opentype'),
-  // url('../fonts/Hero-Light-webfont.woff2') format('woff2'),
-  // url('../fonts/Hero-Light-webfont.woff') format('woff'),
-  // url('../fonts/Hero-Light-webfont.ttf') format('truetype'),
-  // url('../fonts/Hero-Light-webfont.svg#hero_lightlight') format('svg');
-  // font-weight: normal;
-  // font-style: normal;
-
-  src: url('../fonts/Intro.otf');
+  font-family: 'intro_regular';
+  src: url('../fonts/intro-webfont.eot');
+  src: url('../fonts/intro-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/intro-webfont.woff2') format('woff2'),
+       url('../fonts/intro-webfont.woff') format('woff'),
+       url('../fonts/intro-webfont.ttf') format('truetype'),
+       url('../fonts/intro-webfont.svg#intro_regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 h1{
@@ -163,8 +161,7 @@ a{
   }
   #title{
     p{
-      //font-family:"AbrahamLincoln",Verdana,sans-serif;
-      font-family: 'hero_lightlight';
+      font-family: 'intro_regular';
       font-size: 3vw;
       text-align: left;
       clear: both;
@@ -173,10 +170,15 @@ a{
       margin-bottom: 5px;
       margin-top: 5px;
       line-height: 0.8;
+
+      .transition( color 0.5s );
+
       @media screen and (max-width: 1200px) {
         font-size: 37px;
       }
       span{
+        .transition( color 0.5s );
+
         font-size: 4.5vw;
         color: @teal;
         display: block;
@@ -186,7 +188,9 @@ a{
       }
       &:hover{
         color: @teal;
-
+        span{
+          color: #464646;
+        }
       }
     }
   }
@@ -249,8 +253,8 @@ a{
         display:block;
         height:42px;
         text-decoration:none;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
         &:hover {
           background: #FFF;
         }
@@ -276,28 +280,13 @@ a{
   display: block;
 }
 
-/*
-.niss-image{
-  z-index:5;
-  display: block;
-  a{
-    display: block;
-    &:hover{
-      background: rgba(0,0,0,0.5);
-      z-index: 100;
-    }
-  }
-}
-*/
-
 .niss-image{
   position: relative;
 
   &:hover{
     -webkit-filter: grayscale(50%);
     filter: grayscale(50%);
-    -webkit-transition: .3s ease;
-    transition: .3s ease;
+    .transition( .3s ease );
   }
 
   .tint-view{
@@ -309,8 +298,7 @@ a{
     &:hover{
       background: rgb(28,204,204);
       opacity: 0.3;
-      -webkit-transition: .3s ease;
-      transition: .3s ease;
+      .transition( .3s ease );
     }
     img{
       display: block;
@@ -375,6 +363,7 @@ a{
     margin-left: 5px;
     margin-top:15px;
     position:relative;
+    border-bottom: 1px solid #ddd;
     .niss-copy{
       width:250px; margin-left:auto;
       margin-right:auto;
